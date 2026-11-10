@@ -10,6 +10,7 @@ import re
 import subprocess
 import sys
 import tarfile
+import zlib
 
 PAYLOAD = 'public/index.html'
 MEMBERS = {PAYLOAD, 'RELEASE.json', 'MANIFEST.sha256'}
@@ -144,7 +145,7 @@ def read_members(data):
     try:
         with gzip.GzipFile(fileobj=io.BytesIO(data)) as stream:
             raw = stream.read(LIMIT + 1)
-    except (OSError, EOFError) as error:
+    except (OSError, EOFError, zlib.error) as error:
         raise ValueError('STRUCTURE_INVALID: malformed gzip') from error
     require(len(raw) <= LIMIT and len(raw) % 512 == 0, 'STRUCTURE_INVALID: expanded size')
     records, offset = {}, 0
@@ -209,7 +210,7 @@ def validate(archive, evidence, *, repository, revision, tree, workflow, run_id,
     records = read_members(data)
     try:
         metadata = json.loads(records['RELEASE.json'], object_pairs_hook=strict_object)
-    except (json.JSONDecodeError, UnicodeError) as error:
+    except (ValueError, UnicodeError, RecursionError) as error:
         raise ValueError('IDENTITY_MISMATCH: malformed release metadata') from error
     require(isinstance(metadata, dict) and type(metadata.get('format_version')) is int
             and metadata.get('dirty') is False

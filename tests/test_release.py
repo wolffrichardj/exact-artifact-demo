@@ -114,6 +114,10 @@ class ReleaseTests(unittest.TestCase):
         self.rewrite(records, regenerate=True)
         self.rejected('INVENTORY_MISMATCH')
 
+    def test_metadata_recursion_exception_is_normalized(self):
+        with patch.object(r.json, 'loads', side_effect=RecursionError('synthetic parser limit')):
+            self.rejected('IDENTITY_MISMATCH')
+
     def test_manifest_digest_mismatch(self):
         self.rejected('EVIDENCE_MISMATCH', expected_manifest='0' * 64)
         p = Path(self.info['evidence']); p.write_text(p.read_text().replace(self.info['expected_manifest'], '0' * 64))
@@ -180,6 +184,25 @@ class ReleaseTests(unittest.TestCase):
         for data in (valid[:20], gzip.compress(b'not tar', mtime=0), hidden, gzip.compress(gzip.decompress(valid)[:512], mtime=0)):
             with self.subTest(size=len(data)):
                 self.rebind(data); self.rejected('STRUCTURE_INVALID')
+
+    def test_malformed_deflate_and_deep_json_have_cli_rejections(self):
+        cases = [('STRUCTURE_INVALID', b'\x1f\x8b\x08\x00' + bytes(6) + b'\x07' + bytes(8)),
+                 ('IDENTITY_MISMATCH', None)]
+        for code, compressed in cases:
+            with self.subTest(code=code):
+                if compressed is not None:
+                    self.rebind(compressed)
+                else:
+                    self.rewrite(self.records | {'RELEASE.json': b'[' * 2000 + b']' * 2000}, regenerate=True)
+                self.rejected(code)
+                flags = []
+                for name in ('repository', 'workflow', 'revision', 'tree', 'run_id', 'attempt', 'expected_sha', 'expected_manifest'):
+                    flags.extend(['--' + name.replace('_', '-'), self.info[name]])
+                result = subprocess.run([sys.executable, str(Path(r.__file__)), 'validate', self.info['archive'],
+                                         self.info['evidence'], *flags], capture_output=True, text=True)
+                self.assertEqual(result.returncode, 1)
+                self.assertEqual(result.stdout, '')
+                self.assertTrue(json.loads(result.stderr)['error'].startswith(code + ':'))
 
     def test_resource_bounds(self):
         for data in (bytes(r.LIMIT + 1), gzip.compress(bytes(r.LIMIT + 512), mtime=0)):
