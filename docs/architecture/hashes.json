@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "purpose": "Portable integrity inventory, not an exact strict-provenance receipt, signature, or authenticated CI attestation.",
+  "source": {
+    "repository": "https://github.com/wolffrichardj/exact-artifact-demo.git",
+    "revision": "9173c2101daafcb131e62edecadd8da98cc98d8a"
+  },
+  "renderer": {
+    "name": "Archify",
+    "version": "3.2.0",
+    "upstream": "https://github.com/tt-a1i/archify"
+  },
+  "files": {
+    "candidate.json": {
+      "sha256": "de80a749eb3852d1e05cc384821232a19d9856260388af584ba44ec0671e4e4c",
+      "bytes": 10066
+    },
+    "exact-artifact.html": {
+      "sha256": "b291e569ee54bc04ef579cfac6ee90086c164c1341f0cdb6abea5712f14f5976",
+      "bytes": 840995
+    },
+    "preview.svg": {
+      "sha256": "4a2005c16ebf502baf1ab591781e604db137bc45c7a97d9f2c62969e6321aff0",
+      "bytes": 187960
+    },
+    "preview.png": {
+      "sha256": "2b7cb69cc638aefa6293d6ab46cb7a6c8293e30933d6f319e3e34b79bd62804e",
+      "bytes": 912785
+    },
+    "README.md": {
+      "sha256": "b8e6b54f8845085278c2b971f322cd91480c3cedffdbbf2334d0fb0ba2ac9e62",
+      "bytes": 7629
+    },
+    "ARCHIFY-LICENSE.txt": {
+      "sha256": "b799ab081703e7821ae5096d2c1abdf14bbdc75e8ea1c4045998c36ed6db9706",
+      "bytes": 1102
+    },
+    "JetBrainsMono-OFL.txt": {
+      "sha256": "c1ab7c666206842a02b35b30770dac0d7a10156ed401c9defc3f02a754d89e90",
+      "bytes": 4398
+    }
+  },
+  "export": {
+    "producer": "exact-artifact.html",
+    "method": "Native viewer Export menu: PNG Lossless image and SVG Auto; full canonical diagram with viewer state removed."
+  },
+  "validation": {
+    "quality": "showcase",
+    "gates": {
+      "validate": "pass",
+      "deliver": "pass",
+      "strict_check": "pass",
+      "browser_check": "pass"
+    },
+    "browser_viewports": [
+      "1440x900",
+      "1600x1000",
+      "1920x1080",
+      "2048x1320"
+    ],
+    "visual_inspection": [
+      "1440x900 light/dark",
+      "2048x1320 light/dark"
+    ],
+    "receipt_scope": "Exact machine-specific delivery/browser/capture receipts retained privately. Fresh regeneration produces its own provenance."
+  }
+}

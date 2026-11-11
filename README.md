@@ -2,7 +2,7 @@
 
 [Richard Wolff](https://github.com/wolffrichardj) · [Portfolio & case studies](https://richardwolff.me/) · [LinkedIn](https://www.linkedin.com/in/wolffrichardj)
 
-[![exact-artifact-demo CI](https://github.com/wolffrichardj/exact-artifact-demo/actions/workflows/verify.yml/badge.svg?branch=main)](https://github.com/wolffrichardj/exact-artifact-demo/actions/workflows/verify.yml) · [Run the example](#run-the-example) · [Watch the walkthrough](#80-second-walkthrough) · [Scope & lineage](#scope-and-lineage)
+[![exact-artifact-demo CI](https://github.com/wolffrichardj/exact-artifact-demo/actions/workflows/verify.yml/badge.svg?branch=main)](https://github.com/wolffrichardj/exact-artifact-demo/actions/workflows/verify.yml) · [Architecture](#architecture-and-trust-boundary) · [Run the example](#run-the-example) · [Watch the walkthrough](#80-second-walkthrough) · [Scope & lineage](#scope-and-lineage)
 
 **Check the payload, even when the archive hash matches.** This small Python example packages a synthetic HTML page from a clean Git commit, then checks source identity, archive structure and each payload digest before anything is activated.
 
@@ -11,6 +11,24 @@ The demo first verifies a good package. It then substitutes the page bytes and u
 The engineering choice is to validate exact inventory and payload bytes against independently trusted expectations. **Those expectations are the trust boundary:** hashes and supplied context are not signatures or proof that CI succeeded. If an attacker controls the artifact, evidence and every expected input, they can forge agreement. A test deliberately demonstrates that limit.
 
 This source-derived sample demonstrates local packaging and validation. It does not authenticate CI, activate a release or rehearse rollback.
+
+## Architecture and trust boundary
+
+[![Immutable Git packaging, caller expectations and layered artifact validation](docs/architecture/preview.svg)](docs/architecture/README.md)
+
+**Decision:** validate exact inventory and each file's bytes behind the outer
+archive check. The demo re-pins the outer SHA; the unchanged manifest still
+rejects the substituted page with `PAYLOAD_HASH_MISMATCH`.
+
+Caller expectations need an independent trusted path. Supplied CI context is
+not authenticated CI; control of every expectation can forge agreement. The
+flow ends at a local verdict, with no activation or rollback implementation.
+
+[Architecture, source evidence and regeneration](docs/architecture/README.md) ·
+[Download interactive HTML](docs/architecture/exact-artifact.html)
+
+GitHub shows HTML as source/download. Use **Download raw file**, then open the
+saved standalone HTML locally in a desktop browser.
 
 <a id="try-it"></a>
 
