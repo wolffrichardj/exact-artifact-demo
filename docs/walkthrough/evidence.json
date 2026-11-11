@@ -1,0 +1,126 @@
+{
+  "source_repository": "https://github.com/wolffrichardj/exact-artifact-demo",
+  "source_revision": "076da3474dbbac3f3cd882dd3b37403501933c56",
+  "recorded_date": "2026-11-10",
+  "method": "Presentation of recorded local output; selected/reflowed JSON fields, source excerpts and labeled explanatory diagrams.",
+  "synthetic_narrator": "macOS Samantha",
+  "shots": [
+    {
+      "scene": 0,
+      "start": 0,
+      "end": 8,
+      "title": "Would you ship these bytes?",
+      "label": "Boundary diagram",
+      "lines": [
+        "A valid-looking archive can hide a changed payload.",
+        "PIN SOURCE  \u2192  PACKAGE  \u2192  VALIDATE",
+        "Bind source identity and the intended file bytes."
+      ],
+      "note": "Engineering payoff: validate the exact artifact offered for delivery."
+    },
+    {
+      "scene": 1,
+      "start": 8,
+      "end": 20,
+      "title": "Package the captured commit",
+      "label": "Source expression + archive inventory",
+      "lines": [
+        "payload = git(source, 'show', f'{revision}:{PAYLOAD}')",
+        "public/index.html",
+        "RELEASE.json",
+        "MANIFEST.sha256"
+      ],
+      "note": "release.py:105 \u00b7 one synthetic page, metadata and manifest"
+    },
+    {
+      "scene": 2,
+      "start": 20,
+      "end": 33,
+      "title": "A valid artifact passes",
+      "label": "Recorded JSON \u00b7 selected fields",
+      "lines": [
+        "$ python3 -B demo.py",
+        "\"valid\": { \"status\": \"verified\" }",
+        "\"members\": 3",
+        "revision: 076da3474dbb\u2026",
+        "Local synthetic expectations",
+        "Rehearsal exit: 0 (valid + expected rejection)"
+      ],
+      "note": "Full revision, tree and digests accompany this video."
+    },
+    {
+      "scene": 3,
+      "start": 33,
+      "end": 47,
+      "title": "Reach the inner boundary",
+      "label": "Test construction \u00b7 demo.py:16\u201323",
+      "lines": [
+        "1  Substitute the synthetic payload bytes",
+        "2  Repin outer archive SHA in evidence + expectation",
+        "3  Keep the original per-file manifest",
+        "Outer hash agreement is deliberately restored."
+      ],
+      "note": "A controlled test constructor reaches the inner payload check."
+    },
+    {
+      "scene": 4,
+      "start": 47,
+      "end": 58,
+      "title": "The payload check rejects",
+      "label": "Recorded JSON + selected source expression",
+      "lines": [
+        "\"tampered\": { \"status\": \"rejected\" }",
+        "\"error\" category: PAYLOAD_HASH_MISMATCH",
+        "Manifest files or hashes differ.",
+        "verify_payload: expected == actual"
+      ],
+      "note": "release.py:187 \u00b7 full diagnostic in evidence.json"
+    },
+    {
+      "scene": 5,
+      "start": 58,
+      "end": 70,
+      "title": "Expectations need their own trust",
+      "label": "Practical limit",
+      "lines": [
+        "Independently trusted expectations  \u2192  validator",
+        "Hashes are not signatures or CI authentication",
+        "Control every input and agreement can be forged.",
+        "No activation or rollback in this sample"
+      ],
+      "note": "Local synthetic context is not authenticated CI evidence."
+    },
+    {
+      "scene": 6,
+      "start": 70,
+      "end": 80,
+      "title": "Follow the checks in code",
+      "label": "Public source + attribution",
+      "lines": [
+        "Richard Wolff: selected private release-tooling source",
+        "New hardening and adaptation used AI assistance",
+        "github.com/wolffrichardj/exact-artifact-demo",
+        "Revision 076da3474dbb\u2026  \u00b7  README + NOTICE.md",
+        "Start with demo.py \u2192 release.py:verify_payload"
+      ],
+      "note": "Run the demo; inspect the source and exact payload check."
+    }
+  ],
+  "demo_output": {
+    "valid": {
+      "status": "verified",
+      "revision": "076da3474dbbac3f3cd882dd3b37403501933c56",
+      "tree": "32630a4c84fa41d4f79c1ab019d30ff93d5d747b",
+      "sha256": "752a8ec7f23c8529329e1c59a1fbdbe5382fe60ccf03dcd1a7263fbd4ff30bbd",
+      "manifest_sha256": "44822c969d091b8e1cef03757f7ac3f3cdebcf5e96523c33c9dd74029c00f0d3",
+      "members": 3
+    },
+    "tampered": {
+      "status": "rejected",
+      "error": "PAYLOAD_HASH_MISMATCH: manifest files or hashes differ"
+    },
+    "context": "synthetic local expectations, not authenticated CI"
+  },
+  "demo_process_exit": 0,
+  "stdout": "{\n  \"valid\": {\n    \"status\": \"verified\",\n    \"revision\": \"076da3474dbbac3f3cd882dd3b37403501933c56\",\n    \"tree\": \"32630a4c84fa41d4f79c1ab019d30ff93d5d747b\",\n    \"sha256\": \"752a8ec7f23c8529329e1c59a1fbdbe5382fe60ccf03dcd1a7263fbd4ff30bbd\",\n    \"manifest_sha256\": \"44822c969d091b8e1cef03757f7ac3f3cdebcf5e96523c33c9dd74029c00f0d3\",\n    \"members\": 3\n  },\n  \"tampered\": {\n    \"status\": \"rejected\",\n    \"error\": \"PAYLOAD_HASH_MISMATCH: manifest files or hashes differ\"\n  },\n  \"context\": \"synthetic local expectations, not authenticated CI\"\n}\n"
+}
