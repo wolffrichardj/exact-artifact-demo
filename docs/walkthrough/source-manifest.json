@@ -1,0 +1,15 @@
+{
+  "revision": "076da3474dbbac3f3cd882dd3b37403501933c56",
+  "dirty_status": "",
+  "files": {
+    ".github/workflows/verify.yml": "cf710028c89b9eb763912bd6cbbd0b5c38c606dda64b78a566003021a5001d76",
+    ".gitignore": "6feaded4e28ea86e001a6751b4e3d960e8b7c31b9616ff9936b79297086e809b",
+    "LICENSE": "0a0fea0df905048187de2abfbabef7a48d396f226a6edcfd560c7405da417681",
+    "NOTICE.md": "43f3dd9322365764630728d1e1f9ad152974cdd5525c5e88265ca1becb1147df",
+    "README.md": "5a6fe499461e2fb0935e9fa5ffa6028da47350608f1011007f3e9343cbe43393",
+    "demo.py": "1f583fcd7a984259840b79ea86ce287ac0fca1ed8896e1558922b967c9b25abc",
+    "public/index.html": "cdd90c5fcc718ba2db54bde53fff0a316bacb9c06bc2f608fc84de13a21e6e55",
+    "release.py": "0a0c1e2f19c448ea9c05976999da6ea17016dbf102f82650313d7b4d15a05c94",
+    "tests/test_release.py": "df6780d05609d56da6c1007a43e151dcab315cb0eec33a68719fd949cbf51e96"
+  }
+}

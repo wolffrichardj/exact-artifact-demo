@@ -1,0 +1,67 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.596
+Could a valid-looking archive hide changed
+bytes?
+
+00:00:03.596 --> 00:00:08.000
+Richard Wolff's AI-assisted adaptation
+checks that boundary.
+
+00:00:08.000 --> 00:00:13.826
+Packaging reads an immutable Git commit,
+not a moving working file.
+
+00:00:13.826 --> 00:00:20.000
+The archive contains a synthetic page,
+release metadata and a manifest.
+
+00:00:20.000 --> 00:00:26.356
+Supplied expectations bind source,
+context, inventory and digests.
+
+00:00:26.356 --> 00:00:28.763
+The valid package passes.
+
+00:00:28.763 --> 00:00:33.000
+This demo uses local synthetic
+expectations.
+
+00:00:33.000 --> 00:00:36.784
+The rehearsal substitutes payload bytes.
+
+00:00:36.784 --> 00:00:42.554
+It repins the outer archive hash in
+evidence and expectation.
+
+00:00:42.554 --> 00:00:47.000
+The original per-file manifest stays
+unchanged.
+
+00:00:47.000 --> 00:00:51.636
+The inner payload check still rejects the
+artifact.
+
+00:00:51.636 --> 00:00:58.000
+Outer digest agreement alone cannot prove
+the intended files survived.
+
+00:00:58.000 --> 00:01:02.430
+Real expectations need an independently
+trusted source.
+
+00:01:02.430 --> 00:01:06.215
+Hashes are not signatures or CI
+authentication.
+
+00:01:06.215 --> 00:01:10.000
+This sample performs no activation or
+rollback.
+
+00:01:10.000 --> 00:01:15.630
+Run Exact Artifact Demo, then inspect the
+payload check in release.
+
+00:01:15.630 --> 00:01:20.000
+Bind delivery to independently trusted
+expectations.

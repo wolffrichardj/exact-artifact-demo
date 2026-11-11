@@ -4,6 +4,18 @@ Verify the exact bytes offered for delivery before anything is activated. This s
 
 **The trust boundary:** hashes and supplied evidence check consistency against independently trusted expectations. They are not signatures or proof that a CI run succeeded. If an attacker controls the artifact, evidence and every expected input, they can forge agreement. One test deliberately demonstrates that limit.
 
+## 80-second walkthrough
+
+https://github.com/user-attachments/assets/6a80bb12-3ba3-4531-b41f-59c6e717f943
+
+[**Watch or download the captioned walkthrough (MP4)**](docs/walkthrough/walkthrough.mp4)
+
+Watch immutable-source packaging and payload rejection after the enclosing archive hash is re-pinned.
+
+[Transcript](docs/walkthrough/transcript.txt) · [Captions](docs/walkthrough/captions.srt) · [Reproduce the recorded behavior](docs/walkthrough/reproduce.sh) · [Context and source revision](docs/walkthrough/README.md)
+
+The video presents recorded output from synthetic fixtures, with neutral synthetic narration. Its pinned source revision is recorded alongside the video.
+
 ## Try it
 
 Requires Python 3.11+ and Git. No dependencies, containers, accounts or credentials.

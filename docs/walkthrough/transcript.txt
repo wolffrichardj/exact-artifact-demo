@@ -1,0 +1,31 @@
+Exact Artifact Demo
+Source revision: 076da3474dbbac3f3cd882dd3b37403501933c56
+Produced 2026-11-10. Neutral synthetic narration: macOS Samantha.
+Presentation of genuinely recorded local output, with synthetic fixtures; edited/reflowed fields, not a live agent/provider session.
+
+00:00:00.000–00:00:08.000
+Could a valid-looking archive hide changed bytes? Richard Wolff's AI-assisted adaptation checks that boundary.
+
+00:00:08.000–00:00:20.000
+Packaging reads an immutable Git commit, not a moving working file. The archive contains a synthetic page, release metadata and a manifest.
+
+00:00:20.000–00:00:33.000
+Supplied expectations bind source, context, inventory and digests. The valid package passes. This demo uses local synthetic expectations.
+
+00:00:33.000–00:00:47.000
+The rehearsal substitutes payload bytes. It repins the outer archive hash in evidence and expectation. The original per-file manifest stays unchanged.
+
+00:00:47.000–00:00:58.000
+The inner payload check still rejects the artifact. Outer digest agreement alone cannot prove the intended files survived.
+
+00:00:58.000–00:01:10.000
+Real expectations need an independently trusted source. Hashes are not signatures or CI authentication. This sample performs no activation or rollback.
+
+00:01:10.000–00:01:20.000
+Run Exact Artifact Demo, then inspect the payload check in release. Bind delivery to independently trusted expectations.
+
+Context and practical limits (not additional spoken narration)
+This source-derived sample packages one synthetic HTML page, metadata and a manifest from a captured immutable Git commit. Validation binds source, context, exact inventory and payload digests to supplied expectations. The demonstration uses local synthetic expectations. Its test constructor replaces payload bytes and repins the outer digest in evidence and expectation, retaining the original per-file manifest to reach the inner rejection. A real caller must obtain expectations from an independently trusted route. If every expected input is controlled, agreement can be forged. Hash consistency is not a signature or authenticated CI attestation. The sample has 1 MiB compressed/expanded bounds and checks in memory without extraction. It performs no production activation or rollback. The demo exits 0 because valid validation and expected payload rejection both occurred.
+
+Attribution
+Adapted from Richard Wolff's private release tooling, with new hardening and AI-assisted adaptation/review. This public adaptation begins at its actual date; no private history or source maps are included.
