@@ -6,9 +6,9 @@ Verify the exact bytes offered for delivery before anything is activated. This s
 
 ## 80-second walkthrough
 
-[**Watch or download the captioned walkthrough (MP4)**](docs/walkthrough/walkthrough.mp4)
+https://github.com/user-attachments/assets/6a80bb12-3ba3-4531-b41f-59c6e717f943
 
-[![Walkthrough preview](docs/walkthrough/poster.png)](docs/walkthrough/walkthrough.mp4)
+[**Watch or download the captioned walkthrough (MP4)**](docs/walkthrough/walkthrough.mp4)
 
 Watch immutable-source packaging and payload rejection after the enclosing archive hash is re-pinned.
 
