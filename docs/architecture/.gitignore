@@ -1,0 +1,5 @@
+*.delivery.json
+*.delivery-pending.json
+*.browser-check.json
+*.finalize.json
+*.finalize-summary.json

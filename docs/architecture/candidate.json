@@ -1,0 +1,464 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "Exact artifacts: trust the expected inputs, then check every file",
+    "locale": "en",
+    "quality_profile": "showcase",
+    "output": "docs/architecture/exact-artifact.html",
+    "repository": {
+      "url": "https://github.com/wolffrichardj/exact-artifact-demo.git",
+      "revision": "9173c2101daafcb131e62edecadd8da98cc98d8a",
+      "link_mode": "web"
+    },
+    "legend": {
+      "mode": "auto",
+      "entries": {
+        "backend": {
+          "label": "Local Python"
+        },
+        "security": {
+          "label": "Checks / rejection"
+        },
+        "database": {
+          "label": "Source / artifacts"
+        },
+        "external": {
+          "label": "Caller expectations"
+        }
+      }
+    }
+  },
+  "lanes": [
+    {
+      "id": "inputs",
+      "label": "Inputs: Git source + caller expectations (synthetic in this demo)"
+    },
+    {
+      "id": "local",
+      "label": "Local Python: package() writes; validate() reads and checks"
+    },
+    {
+      "id": "rejection",
+      "label": "Failure paths: caught CLI errors return rejected JSON / exit 1",
+      "variant": "exception"
+    }
+  ],
+  "mainPath": [
+    "source",
+    "package",
+    "pair",
+    "outer",
+    "members",
+    "files",
+    "verified"
+  ],
+  "nodes": [
+    {
+      "id": "source",
+      "lane": "inputs",
+      "col": 0,
+      "type": "database",
+      "label": "Clean Git commit",
+      "sublabel": "captured commit + tree",
+      "sources": [
+        {
+          "path": "release.py",
+          "line": 90,
+          "end_line": 106
+        }
+      ]
+    },
+    {
+      "id": "context",
+      "lane": "inputs",
+      "col": 2,
+      "type": "external",
+      "label": "Expected archive/context",
+      "sublabel": "SHA + repo/workflow/run",
+      "sources": [
+        {
+          "path": "release.py",
+          "line": 190,
+          "end_line": 209
+        }
+      ]
+    },
+    {
+      "id": "identity",
+      "lane": "inputs",
+      "col": 3,
+      "type": "external",
+      "label": "Expected source identity",
+      "sublabel": "full commit + tree",
+      "sources": [
+        {
+          "path": "release.py",
+          "line": 190,
+          "end_line": 193
+        },
+        {
+          "path": "release.py",
+          "line": 210,
+          "end_line": 218
+        }
+      ]
+    },
+    {
+      "id": "manifest",
+      "lane": "inputs",
+      "col": 4,
+      "type": "external",
+      "label": "Expected manifest SHA",
+      "sublabel": "independently trusted",
+      "sources": [
+        {
+          "path": "release.py",
+          "line": 190,
+          "end_line": 193
+        },
+        {
+          "path": "release.py",
+          "line": 219,
+          "end_line": 233
+        }
+      ]
+    },
+    {
+      "id": "package",
+      "lane": "local",
+      "col": 0,
+      "type": "backend",
+      "label": "package()",
+      "sublabel": "Git objects \u2192 output files",
+      "sources": [
+        {
+          "path": "release.py",
+          "line": 90,
+          "end_line": 106
+        },
+        {
+          "path": "release.py",
+          "line": 107,
+          "end_line": 132
+        },
+        {
+          "path": "release.py",
+          "line": 67,
+          "end_line": 87
+        }
+      ]
+    },
+    {
+      "id": "pair",
+      "lane": "local",
+      "col": 1,
+      "type": "database",
+      "label": "Archive + evidence",
+      "sublabel": "3 members + context text",
+      "sources": [
+        {
+          "path": "release.py",
+          "line": 107,
+          "end_line": 132
+        }
+      ]
+    },
+    {
+      "id": "outer",
+      "lane": "local",
+      "col": 2,
+      "type": "security",
+      "label": "Outer bytes + context",
+      "sublabel": "digest + exact field match",
+      "sources": [
+        {
+          "path": "release.py",
+          "line": 190,
+          "end_line": 210
+        }
+      ]
+    },
+    {
+      "id": "members",
+      "lane": "local",
+      "col": 3,
+      "type": "security",
+      "label": "Inventory + metadata",
+      "sublabel": "bounded; no extraction",
+      "sources": [
+        {
+          "path": "release.py",
+          "line": 135,
+          "end_line": 173
+        },
+        {
+          "path": "release.py",
+          "line": 176,
+          "end_line": 181
+        },
+        {
+          "path": "release.py",
+          "line": 210,
+          "end_line": 218
+        }
+      ]
+    },
+    {
+      "id": "files",
+      "lane": "local",
+      "col": 4,
+      "type": "security",
+      "label": "Manifest + file hashes",
+      "sublabel": "exact membership + bytes",
+      "sources": [
+        {
+          "path": "release.py",
+          "line": 219,
+          "end_line": 235
+        },
+        {
+          "path": "release.py",
+          "line": 184,
+          "end_line": 187
+        }
+      ]
+    },
+    {
+      "id": "verified",
+      "lane": "local",
+      "col": 5,
+      "type": "backend",
+      "label": "Verified locally",
+      "sublabel": "agrees with expectations",
+      "sources": [
+        {
+          "path": "release.py",
+          "line": 234,
+          "end_line": 235
+        },
+        {
+          "path": "release.py",
+          "line": 254,
+          "end_line": 260
+        }
+      ]
+    },
+    {
+      "id": "buildfail",
+      "lane": "rejection",
+      "col": 0,
+      "type": "security",
+      "label": "Packaging rejected",
+      "sublabel": "context / source / I/O",
+      "sources": [
+        {
+          "path": "release.py",
+          "line": 90,
+          "end_line": 106
+        },
+        {
+          "path": "release.py",
+          "line": 113,
+          "end_line": 129
+        },
+        {
+          "path": "release.py",
+          "line": 254,
+          "end_line": 260
+        }
+      ]
+    },
+    {
+      "id": "outerfail",
+      "lane": "rejection",
+      "col": 2,
+      "type": "security",
+      "label": "Outer/context rejected",
+      "sublabel": "hash or evidence differs",
+      "sources": [
+        {
+          "path": "release.py",
+          "line": 190,
+          "end_line": 209
+        },
+        {
+          "path": "release.py",
+          "line": 254,
+          "end_line": 260
+        }
+      ]
+    },
+    {
+      "id": "memberfail",
+      "lane": "rejection",
+      "col": 3,
+      "type": "security",
+      "label": "Members/identity rejected",
+      "sublabel": "unsafe or unexpected bytes",
+      "sources": [
+        {
+          "path": "release.py",
+          "line": 144,
+          "end_line": 173
+        },
+        {
+          "path": "release.py",
+          "line": 210,
+          "end_line": 218
+        },
+        {
+          "path": "release.py",
+          "line": 254,
+          "end_line": 260
+        }
+      ]
+    },
+    {
+      "id": "filefail",
+      "lane": "rejection",
+      "col": 4,
+      "type": "security",
+      "label": "Manifest/files rejected",
+      "sublabel": "PAYLOAD_HASH_MISMATCH",
+      "sources": [
+        {
+          "path": "release.py",
+          "line": 219,
+          "end_line": 233
+        },
+        {
+          "path": "demo.py",
+          "line": 14,
+          "end_line": 31
+        },
+        {
+          "path": "tests/test_release.py",
+          "line": 68,
+          "end_line": 80
+        }
+      ],
+      "tag": "re-pinned outer SHA case"
+    }
+  ],
+  "edges": [
+    {
+      "id": "git-read",
+      "from": "source",
+      "to": "package",
+      "label": "Git read"
+    },
+    {
+      "id": "write-pair",
+      "from": "package",
+      "to": "pair",
+      "label": "writes"
+    },
+    {
+      "id": "read-pair",
+      "from": "pair",
+      "to": "outer",
+      "label": "reads"
+    },
+    {
+      "id": "outer-pass",
+      "from": "outer",
+      "to": "members",
+      "label": "match"
+    },
+    {
+      "id": "members-pass",
+      "from": "members",
+      "to": "files",
+      "label": "safe + exact"
+    },
+    {
+      "id": "files-pass",
+      "from": "files",
+      "to": "verified",
+      "label": "match"
+    },
+    {
+      "id": "expect-context",
+      "from": "context",
+      "to": "outer",
+      "variant": "security",
+      "label": "compare"
+    },
+    {
+      "id": "expect-identity",
+      "from": "identity",
+      "to": "members",
+      "variant": "security",
+      "label": "compare"
+    },
+    {
+      "id": "expect-manifest",
+      "from": "manifest",
+      "to": "files",
+      "variant": "security",
+      "label": "compare"
+    },
+    {
+      "id": "package-fail",
+      "from": "package",
+      "to": "buildfail",
+      "role": "error",
+      "variant": "security",
+      "label": "error"
+    },
+    {
+      "id": "outer-fail",
+      "from": "outer",
+      "to": "outerfail",
+      "role": "error",
+      "variant": "security",
+      "label": "mismatch"
+    },
+    {
+      "id": "member-fail",
+      "from": "members",
+      "to": "memberfail",
+      "role": "error",
+      "variant": "security",
+      "label": "invalid"
+    },
+    {
+      "id": "files-fail",
+      "from": "files",
+      "to": "filefail",
+      "role": "error",
+      "variant": "security",
+      "label": "mismatch"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Exact package",
+      "items": [
+        "public/index.html + RELEASE.json + MANIFEST.sha256",
+        "Manifest hashes page + release metadata; never itself.",
+        "Deterministic tar/gzip; outputs outside clean checkout."
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Why the inner check matters",
+      "items": [
+        "Demo replaces page and re-pins outer SHA in evidence + expectation.",
+        "Original manifest stays: per-file checking rejects substituted bytes.",
+        "Disabling that comparison admits the corrupt fixture (sensitivity test)."
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "Trust and scope limits",
+      "items": [
+        "Expected inputs need an independent trusted path outside this sample.",
+        "Control every expectation and agreement can be forged.",
+        "Supplied CI context is not authenticated CI. No activation or rollback."
+      ]
+    }
+  ]
+}
